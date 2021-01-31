@@ -14,6 +14,6 @@ export const items = [
   {
     name: 'add event',
     walled: true,
-    url: '/new',
+    url: '/add',
   },
 ];
