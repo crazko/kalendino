@@ -1,8 +1,8 @@
 import { Document } from './types';
 
 export type Event = {
-  date_start: Date;
-  date_end: Date;
+  dateStart: Date;
+  dateEnd: Date;
   name: string;
   online?: string;
   summary: string;
@@ -24,15 +24,15 @@ export const serializeEvent = (event: Event) => {
 
   return {
     ...eventWithoutSnapshot,
-    date_start: eventWithoutSnapshot.date_start.toISOString(),
-    date_end: eventWithoutSnapshot.date_end.toISOString(),
+    dateStart: eventWithoutSnapshot.dateStart.toISOString(),
+    dateEnd: eventWithoutSnapshot.dateEnd.toISOString(),
   };
 };
 
 export const deserializeEvent = (serializedEvent: SerializedEvent) => ({
   ...serializedEvent,
-  date_start: new Date(serializedEvent.date_start),
-  date_end: new Date(serializedEvent.date_end),
+  dateStart: new Date(serializedEvent.dateStart),
+  dateEnd: new Date(serializedEvent.dateEnd),
 });
 
-export const parseDates: (keyof Event)[] = ['date_start', 'date_end'];
+export const parseDates: (keyof Event)[] = ['dateStart', 'dateEnd'];
