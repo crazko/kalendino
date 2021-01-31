@@ -1,12 +1,19 @@
 import Head from 'next/head';
+import { useCollection } from '@nandorojo/swr-firestore';
+
+import { Showcase } from '../components/Showcase';
 
 const Home = () => {
+  const { data, update, error } = useCollection('events');
+
   return (
-    <div className="container">
+    <>
       <Head>
         <title>Home</title>
       </Head>
-    </div>
+
+      {data ? <Showcase events={data} /> : <div>loading</div>}
+    </>
   );
 };
 

@@ -1,14 +1,13 @@
 import Head from 'next/head';
 
-import data from '../data';
 import { Showcase } from '../components/Showcase';
 
 const title = 'Past Events';
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   return {
     props: {
-      events: data,
+      events: [],
     },
   };
 };
