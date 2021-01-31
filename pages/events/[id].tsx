@@ -3,6 +3,7 @@ import { getDocument } from '@nandorojo/swr-firestore';
 
 import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from '../../app/event';
 import { Date } from '../../components/Date';
+import { Location } from '../../components/Location';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.query.id;
@@ -24,17 +25,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEvent }) => {
-  const { name, summary, online, dateStart, dateEnd } = deserializeEvent(serializedEvent);
+  const event = deserializeEvent(serializedEvent);
+  const { name, dateStart, dateEnd, summary } = event;
 
   return (
     <>
       <h1>{name}</h1>
       <Date dateStart={dateStart} dateEnd={dateEnd} />
-      {online && (
-        <div>
-          <a href={online}>{online}</a>
-        </div>
-      )}
+      <div>
+        <Location event={event} />
+      </div>
       <div>{summary}</div>
     </>
   );

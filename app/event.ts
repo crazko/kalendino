@@ -1,12 +1,23 @@
+import firebase from 'firebase/app';
+
 import { Document } from './types';
 
-export type Event = {
+type EventCommon = {
   dateStart: Date;
   dateEnd: Date;
   name: string;
-  online?: string;
   summary: string;
 } & Document;
+
+type OnlineEvent = {
+  online: string;
+} & EventCommon;
+
+type LocalEvent = {
+  location: firebase.firestore.GeoPoint;
+} & EventCommon;
+
+export type Event = OnlineEvent | LocalEvent;
 
 export type SerializedEvent = ReturnType<typeof serializeEvent>;
 
@@ -18,21 +29,44 @@ export type WithEvents = {
   events: Event[];
 };
 
-// See https://github.com/vercel/next.js/issues/13209#issuecomment-633149650
+// Need to simplify objects, see https://github.com/vercel/next.js/issues/13209#issuecomment-633149650
 export const serializeEvent = (event: Event) => {
   const { __snapshot, ...eventWithoutSnapshot } = event;
 
-  return {
+  const serializedEvent = {
     ...eventWithoutSnapshot,
     dateStart: eventWithoutSnapshot.dateStart.toISOString(),
     dateEnd: eventWithoutSnapshot.dateEnd.toISOString(),
   };
+
+  if ('location' in serializedEvent) {
+    return {
+      ...serializedEvent,
+      location: JSON.stringify(serializedEvent.location),
+    };
+  }
+
+  return serializedEvent;
 };
 
-export const deserializeEvent = (serializedEvent: SerializedEvent) => ({
-  ...serializedEvent,
-  dateStart: new Date(serializedEvent.dateStart),
-  dateEnd: new Date(serializedEvent.dateEnd),
-});
+export const deserializeEvent = (serializedEvent: SerializedEvent): Event => {
+  const deserializedEvent = {
+    ...serializedEvent,
+    __snapshot: undefined,
+    dateStart: new Date(serializedEvent.dateStart),
+    dateEnd: new Date(serializedEvent.dateEnd),
+  };
+
+  if ('location' in deserializedEvent) {
+    const { latitude, longitude } = JSON.parse(deserializedEvent.location);
+
+    return {
+      ...deserializedEvent,
+      location: new firebase.firestore.GeoPoint(latitude, longitude),
+    };
+  }
+
+  return deserializedEvent;
+};
 
 export const parseDates: (keyof Event)[] = ['dateStart', 'dateEnd'];
