@@ -1,5 +1,6 @@
 import Head from 'next/head';
 
+import { WithEvents } from '../app/types';
 import { Showcase } from '../components/Showcase';
 
 const title = 'Past Events';
@@ -12,7 +13,7 @@ export const getServerSideProps = async () => {
   };
 };
 
-const Past = ({ events }) => {
+const Past: React.FC<WithEvents> = ({ events }) => {
   return (
     <>
       <Head>

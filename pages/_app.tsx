@@ -1,3 +1,4 @@
+import { AppProps } from 'next/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import { FuegoProvider } from '@nandorojo/swr-firestore';
@@ -16,7 +17,7 @@ const firebaseConfig = {
 
 const fuego = new Fuego(firebaseConfig);
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <FuegoProvider fuego={fuego}>
       <Layout>

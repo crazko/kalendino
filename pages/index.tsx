@@ -1,10 +1,11 @@
 import Head from 'next/head';
 import { useCollection } from '@nandorojo/swr-firestore';
 
+import { Event } from '../app/types';
 import { Showcase } from '../components/Showcase';
 
 const Home = () => {
-  const { data, update, error } = useCollection('events');
+  const { data } = useCollection<Event>('events');
 
   return (
     <>

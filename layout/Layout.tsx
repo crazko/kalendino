@@ -1,27 +1,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
+import { items } from '../app/navigation';
 import { Navigation } from './Navigation';
 
-const items = [
-  {
-    name: 'all events',
-    walled: false,
-    url: '/events',
-  },
-  {
-    name: 'past events',
-    walled: false,
-    url: '/past',
-  },
-  {
-    name: 'add event',
-    walled: true,
-    url: '/new',
-  },
-];
-
-export const Layout = ({ children }) => {
+export const Layout: React.FC = ({ children }) => {
   return (
     <>
       <Head>

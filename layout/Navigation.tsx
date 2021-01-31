@@ -1,6 +1,13 @@
 import Link from 'next/link';
 
-export const Navigation = ({ items }) => (
+import { NavigationItem } from '../app/navigation';
+
+type NavigationProps = {
+  children?: never;
+  items: NavigationItem[];
+};
+
+export const Navigation: React.FC<NavigationProps> = ({ items }) => (
   <nav>
     <ul>
       {items.map(
