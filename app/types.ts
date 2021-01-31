@@ -1,9 +1,6 @@
-export type Event = {
+export type Document = {
+  exists: boolean;
+  hasPendingWrites: boolean;
   id: string;
-  name: string;
-  summary: string;
-};
-
-export type WithEvents = {
-  events: Event[];
+  __snapshot: any;
 };

@@ -1,11 +1,13 @@
 import Head from 'next/head';
 import { useCollection } from '@nandorojo/swr-firestore';
 
-import { Event } from '../app/types';
+import { Event, parseDates } from '../app/event';
 import { Showcase } from '../components/Showcase';
 
 const Home = () => {
-  const { data } = useCollection<Event>('events');
+  const { data } = useCollection<Event>('events', {
+    parseDates,
+  });
 
   return (
     <>

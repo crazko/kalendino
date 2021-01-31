@@ -1,3 +1,5 @@
+export type NavigationItem = typeof items[0];
+
 export const items = [
   {
     name: 'all events',
@@ -15,5 +17,3 @@ export const items = [
     url: '/new',
   },
 ];
-
-export type NavigationItem = typeof items[0];

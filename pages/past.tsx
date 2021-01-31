@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { WithEvents } from '../app/types';
+import { WithEvents } from '../app/event';
 import { Showcase } from '../components/Showcase';
 
 const title = 'Past Events';
