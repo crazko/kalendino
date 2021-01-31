@@ -5,6 +5,7 @@ import { FuegoProvider } from '@nandorojo/swr-firestore';
 
 import { Layout } from '../layout/Layout';
 import { Fuego } from '../utils/fuego';
+import { AuthProvider } from '../app/AuthProvider';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -19,10 +20,12 @@ const fuego = new Fuego(firebaseConfig);
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <FuegoProvider fuego={fuego}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </FuegoProvider>
+    <AuthProvider>
+      <FuegoProvider fuego={fuego}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </FuegoProvider>
+    </AuthProvider>
   );
 }
