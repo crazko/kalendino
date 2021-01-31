@@ -1,11 +1,8 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { getDocument } from '@nandorojo/swr-firestore';
 
-import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from '../../app/event';
-import { Date } from '../../components/Date';
-import { Location } from '../../components/Location';
+import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from '../../../app/event';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.query.id;
@@ -28,25 +25,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEvent }) => {
   const event = deserializeEvent(serializedEvent);
-  const { id, name, dateStart, dateEnd, summary } = event;
+  const { name } = event;
+
+  const title = `Edit ${name}`;
 
   return (
     <>
       <Head>
-        <title>{name}</title>
+        <title>{title}</title>
       </Head>
-      <h1>{name}</h1>
 
-      <Date dateStart={dateStart} dateEnd={dateEnd} />
-      <div>
-        <Link href={`/events/${id}/edit`}>
-          <a>edit</a>
-        </Link>
-      </div>
-      <div>
-        <Location event={event} />
-      </div>
-      <div>{summary}</div>
+      <h1>{title}</h1>
     </>
   );
 };

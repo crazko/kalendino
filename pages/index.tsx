@@ -13,8 +13,6 @@ const Home = () => {
     orderBy: ['dateStart', 'desc'],
   });
 
-  console.log({ data });
-
   return (
     <>
       <Head>
