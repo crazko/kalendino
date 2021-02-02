@@ -51,7 +51,7 @@ const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEven
       <div>
         <Location event={event} />
       </div>
-      <div>{summary}</div>
+      <div style={{ whiteSpace: 'pre-line' }}>{summary}</div>
     </>
   );
 };

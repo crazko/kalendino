@@ -9,17 +9,21 @@ type EventCommon = {
   summary: string;
 } & Document;
 
-type OnlineEvent = {
+export type OnlineEvent = {
   online: string;
 } & EventCommon;
 
-type LocalEvent = {
+export type LocalEvent = {
   location: firebase.firestore.GeoPoint;
 } & EventCommon;
 
 export type Event = OnlineEvent | LocalEvent;
 
 export type SerializedEvent = ReturnType<typeof serializeEvent>;
+
+export type EventType = {
+  type: 'online' | 'local';
+};
 
 export type WithEvent<EventType extends Event | SerializedEvent = Event> = {
   event: EventType;
@@ -68,5 +72,7 @@ export const deserializeEvent = (serializedEvent: SerializedEvent): Event => {
 
   return deserializedEvent;
 };
+
+export const getEventType = (event: Event) => ('online' in event ? 'online' : 'local');
 
 export const parseDates: (keyof Event)[] = ['dateStart', 'dateEnd'];

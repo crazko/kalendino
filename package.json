@@ -13,10 +13,12 @@
   "dependencies": {
     "@nandorojo/swr-firestore": "^0.16.0",
     "date-fns": "^2.16.1",
+    "final-form": "^4.20.1",
     "firebase": "^8.2.5",
     "next": "^10.0.6",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-final-form": "^6.5.2"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
