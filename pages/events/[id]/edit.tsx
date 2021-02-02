@@ -2,8 +2,8 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { getDocument } from '@nandorojo/swr-firestore';
 
-import { useAuth } from '../../../app/AuthProvider';
-import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from '../../../app/event';
+import { useAuth } from 'app/AuthProvider';
+import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from 'app/event';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.query.id;

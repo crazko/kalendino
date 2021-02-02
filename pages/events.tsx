@@ -1,7 +1,7 @@
 import Head from 'next/head';
 
-import { WithEvents } from '../app/event';
-import { Showcase } from '../components/Showcase';
+import { WithEvents } from 'app/event';
+import { Showcase } from 'components/Showcase';
 
 const title = 'All Events';
 

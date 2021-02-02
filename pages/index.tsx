@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { useCollection } from '@nandorojo/swr-firestore';
 
-import { Event, parseDates } from '../app/event';
-import { Showcase } from '../components/Showcase';
+import { Event, parseDates } from 'app/event';
+import { Showcase } from 'components/Showcase';
 
 const title = 'Upcoming Events';
 

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { useAuth } from '../app/AuthProvider';
+import { useAuth } from 'app/AuthProvider';
 
 const title = 'Add Event';
 

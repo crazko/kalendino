@@ -3,10 +3,10 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { getDocument } from '@nandorojo/swr-firestore';
 
-import { useAuth } from '../../app/AuthProvider';
-import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from '../../app/event';
-import { Date } from '../../components/Date';
-import { Location } from '../../components/Location';
+import { useAuth } from 'app/AuthProvider';
+import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from 'app/event';
+import { Date } from 'components/Date';
+import { Location } from 'components/Location';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.query.id;

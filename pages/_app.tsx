@@ -3,9 +3,9 @@ import 'firebase/firestore';
 import 'firebase/auth';
 import { FuegoProvider } from '@nandorojo/swr-firestore';
 
-import { Layout } from '../layout/Layout';
-import { Fuego } from '../utils/fuego';
-import { AuthProvider } from '../app/AuthProvider';
+import { AuthProvider } from 'app/AuthProvider';
+import { Layout } from 'layout/Layout';
+import { Fuego } from 'utils/fuego';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
