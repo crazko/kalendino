@@ -16,7 +16,7 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const fuego = new Fuego(firebaseConfig);
+export const fuego = new Fuego(firebaseConfig);
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
