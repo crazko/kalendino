@@ -12,9 +12,9 @@ const Add: React.FC = () => {
   if (!isLoggedIn) {
     if (typeof window !== 'undefined') {
       router.push('/');
-    } else {
-      return null;
     }
+
+    return null;
   }
 
   return (

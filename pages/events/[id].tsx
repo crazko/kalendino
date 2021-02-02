@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { getDocument } from '@nandorojo/swr-firestore';
 
+import { useAuth } from '../../app/AuthProvider';
 import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from '../../app/event';
 import { Date } from '../../components/Date';
 import { Location } from '../../components/Location';
@@ -27,6 +28,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEvent }) => {
+  const { isLoggedIn } = useAuth();
+
   const event = deserializeEvent(serializedEvent);
   const { id, name, dateStart, dateEnd, summary } = event;
 
@@ -38,11 +41,13 @@ const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEven
       <h1>{name}</h1>
 
       <Date dateStart={dateStart} dateEnd={dateEnd} />
-      <div>
-        <Link href={`/events/${id}/edit`}>
-          <a>edit</a>
-        </Link>
-      </div>
+      {isLoggedIn && (
+        <div>
+          <Link href={`/events/${id}/edit`}>
+            <a>edit</a>
+          </Link>
+        </div>
+      )}
       <div>
         <Location event={event} />
       </div>
