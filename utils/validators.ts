@@ -5,8 +5,9 @@ export const composeValidators = (...validators: any[]) => (value: any) =>
 
 export const required = (value: any) => (value ? undefined : 'Required');
 
-export const before = (value: Date) => (date: Date) => (isBefore(date, value) ? undefined : 'Required');
+export const before = (value: Date) => (date: Date) =>
+  isBefore(date, value) ? undefined : `Should be before ${value}`;
 
-export const after = (value: Date) => (date: Date) => (isAfter(date, value) ? undefined : 'Required');
+export const after = (value: Date) => (date: Date) => (isAfter(date, value) ? undefined : `Should be after ${value}`);
 
 export const match = (pattern: RegExp) => (value: string) => (value.match(pattern) ? undefined : 'Wrong input');

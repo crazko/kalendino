@@ -11,7 +11,7 @@ const DynamicMap = dynamic(() => import('./Map').then((module) => module.Map) as
   ssr: false,
 });
 
-export const LocationField = () => {
+export const LocationField: React.FC<{ children?: never }> = () => {
   const { input } = useField<LocalEvent['location']>('location', {
     format: (value) => [value.latitude, value.longitude],
     parse: (value) => new firebase.firestore.GeoPoint(value[0], value[1]),
