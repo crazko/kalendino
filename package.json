@@ -15,12 +15,15 @@
     "date-fns": "^2.16.1",
     "final-form": "^4.20.1",
     "firebase": "^8.2.5",
+    "leaflet": "^1.7.1",
     "next": "^10.0.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-final-form": "^6.5.2"
+    "react-final-form": "^6.5.2",
+    "react-leaflet": "^3.1.0"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.5.21",
     "@types/react": "^17.0.0",
     "faker": "^5.2.0",
     "firebase-tools": "^9.2.2",
