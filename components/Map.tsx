@@ -1,6 +1,6 @@
 import { Icon, LatLngTuple } from 'leaflet';
 import { useState } from 'react';
-import { MapContainer, TileLayer, Popup, Marker, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
 
@@ -41,11 +41,9 @@ const LocationMarker: React.FC<LocationMarker> = ({ position: initialPosition, o
   return position ? <Marker position={position} icon={icon} /> : null;
 };
 
-export const Map: React.FC<MapProps> = ({ onClick, center, className, zoom = 13 }) => {
-  return (
-    <MapContainer center={center} zoom={zoom} className={className} style={style}>
-      <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" />
-      <LocationMarker position={center} onClick={onClick} />
-    </MapContainer>
-  );
-};
+export const Map: React.FC<MapProps> = ({ onClick, center, className, zoom = 13 }) => (
+  <MapContainer center={center} zoom={zoom} className={className} style={style}>
+    <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" />
+    <LocationMarker position={center} onClick={onClick} />
+  </MapContainer>
+);

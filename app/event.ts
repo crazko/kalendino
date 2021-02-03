@@ -73,6 +73,6 @@ export const deserializeEvent = (serializedEvent: SerializedEvent): Event => {
   return deserializedEvent;
 };
 
-export const getEventType = (event: Event) => ('online' in event ? 'online' : 'local');
+export const getEventType = (event: Event): EventType['type'] => ('online' in event ? 'online' : 'local');
 
 export const parseDates: (keyof Event)[] = ['dateStart', 'dateEnd'];
