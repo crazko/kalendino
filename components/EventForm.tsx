@@ -5,6 +5,9 @@ import { Condition } from './Condition';
 import { composeValidators, match, required } from 'utils/validators';
 import { LocationField } from './LocationField';
 import { DateRangeField } from './DateRangeField';
+import { urlPattern } from 'utils/string';
+
+const regexUrl = new RegExp(urlPattern);
 
 export const EventForm: React.FC<FormRenderProps<Event>> = ({ handleSubmit, invalid, submitting, pristine }) => (
   <form onSubmit={handleSubmit}>
@@ -27,13 +30,8 @@ export const EventForm: React.FC<FormRenderProps<Event>> = ({ handleSubmit, inva
             component="input"
             name="url"
             type="text"
-            pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
-            validate={composeValidators(
-              required,
-              match(
-                /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
-              )
-            )}
+            pattern={urlPattern}
+            validate={composeValidators(required, match(regexUrl))}
             required
           />
         </Condition>
