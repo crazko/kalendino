@@ -40,7 +40,7 @@ service cloud.firestore {
     match /events/{eventId} {
       allow read: if true;
 
-      allow update: if  isLoggedIn() && eventIsValid();
+      allow write, update: if  isLoggedIn() && eventIsValid();
     }
   }
 }
