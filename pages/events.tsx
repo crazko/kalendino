@@ -1,19 +1,18 @@
 import Head from 'next/head';
+import { useCollection } from '@nandorojo/swr-firestore';
 
-import { WithEvents } from 'app/event';
+import { Event, parseDates } from 'app/event';
+import { Loader } from 'components/Loader';
 import { Showcase } from 'components/Showcase';
 
 const title = 'All Events';
 
-export const getServerSideProps = async () => {
-  return {
-    props: {
-      events: [],
-    },
-  };
-};
+const EventsPage = () => {
+  const { data } = useCollection<Event>('events', {
+    parseDates,
+    orderBy: ['dateStart', 'desc'],
+  });
 
-const Events: React.FC<WithEvents> = ({ events }) => {
   return (
     <>
       <Head>
@@ -22,9 +21,9 @@ const Events: React.FC<WithEvents> = ({ events }) => {
 
       <h1>{title}</h1>
 
-      <Showcase events={events} />
+      {data ? <Showcase events={data} /> : <Loader />}
     </>
   );
 };
 
-export default Events;
+export default EventsPage;

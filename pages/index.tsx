@@ -2,15 +2,18 @@ import Head from 'next/head';
 import { useCollection } from '@nandorojo/swr-firestore';
 
 import { Event, parseDates } from 'app/event';
+import { Loader } from 'components/Loader';
 import { Showcase } from 'components/Showcase';
 
 const title = 'Upcoming Events';
 
-const Home = () => {
+const now = new Date();
+
+const HomePage = () => {
   const { data } = useCollection<Event>('events', {
     parseDates,
-    limit: 5,
-    orderBy: ['dateStart', 'desc'],
+    orderBy: ['dateStart', 'asc'],
+    // where: ['dateStart', '<', now], Currently not possible to query by datetime, see https://github.com/nandorojo/swr-firestore/issues/51
   });
 
   return (
@@ -21,9 +24,9 @@ const Home = () => {
 
       <h1>{title}</h1>
 
-      {data ? <Showcase events={data} /> : <div>loading</div>}
+      {data ? <Showcase events={data.filter((event) => event.dateStart > now)} /> : <Loader />}
     </>
   );
 };
 
-export default Home;
+export default HomePage;

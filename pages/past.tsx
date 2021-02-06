@@ -1,19 +1,21 @@
 import Head from 'next/head';
+import { useCollection } from '@nandorojo/swr-firestore';
 
-import { WithEvents } from 'app/event';
+import { Event, parseDates } from 'app/event';
+import { Loader } from 'components/Loader';
 import { Showcase } from 'components/Showcase';
 
 const title = 'Past Events';
 
-export const getServerSideProps = async () => {
-  return {
-    props: {
-      events: [],
-    },
-  };
-};
+const now = new Date();
 
-const Past: React.FC<WithEvents> = ({ events }) => {
+const PastPage = () => {
+  const { data } = useCollection<Event>('events', {
+    parseDates,
+    orderBy: ['dateStart', 'desc'],
+    // where: ['dateStart', '<', now], Currently not possible to query by datetime, see https://github.com/nandorojo/swr-firestore/issues/51
+  });
+
   return (
     <>
       <Head>
@@ -22,9 +24,9 @@ const Past: React.FC<WithEvents> = ({ events }) => {
 
       <h1>{title}</h1>
 
-      <Showcase events={events} />
+      {data ? <Showcase events={data.filter((event) => event.dateStart < now)} /> : <Loader />}
     </>
   );
 };
 
-export default Past;
+export default PastPage;
