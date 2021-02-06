@@ -1,13 +1,13 @@
 import { useField, useFormState } from 'react-final-form';
 import DatePicker from 'react-datepicker';
-import { addHours } from 'date-fns';
+import { addHours, startOfHour } from 'date-fns';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { Event } from 'app/event';
 import { after, before, composeValidators, required } from 'utils/validators';
 
-const initialStartDate = new Date();
+const initialStartDate = addHours(startOfHour(new Date()), 1);
 const initialEndDate = addHours(initialStartDate, 1);
 
 export const DateRangeField: React.FC<{ children?: never }> = () => {
