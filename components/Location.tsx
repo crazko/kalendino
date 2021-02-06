@@ -5,8 +5,8 @@ type LocationProps = {
 } & WithEvent;
 
 export const Location: React.FC<LocationProps> = ({ event }) => {
-  if ('online' in event) {
-    return <a href={event.online}>{event.online}</a>;
+  if (event.type === 'online') {
+    return <a href={event.url}>{event.url}</a>;
   }
 
   return (

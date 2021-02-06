@@ -49,8 +49,9 @@ const writeData = async (length) => {
 
         // Location / Online event
         ...(randomize()
-          ? { online: faker.internet.url() }
+          ? { type: 'online', url: faker.internet.url() }
           : {
+              type: 'local',
               location: new firebase.firestore.GeoPoint(faker.address.latitude(), faker.address.longitude()),
             }),
       };

@@ -1,29 +1,27 @@
 import firebase from 'firebase/app';
 
-import { Document } from './types';
+import { FirebaseDocumentData } from './types';
 
 type EventCommon = {
   dateStart: Date;
   dateEnd: Date;
   name: string;
   summary: string;
-} & Document;
+} & FirebaseDocumentData;
 
 export type OnlineEvent = {
-  online: string;
+  type: 'online';
+  url: string;
 } & EventCommon;
 
 export type LocalEvent = {
+  type: 'local';
   location: firebase.firestore.GeoPoint;
 } & EventCommon;
 
 export type Event = OnlineEvent | LocalEvent;
 
 export type SerializedEvent = ReturnType<typeof serializeEvent>;
-
-export type EventType = {
-  type: 'online' | 'local';
-};
 
 export type WithEvent<EventType extends Event | SerializedEvent = Event> = {
   event: EventType;
@@ -72,7 +70,5 @@ export const deserializeEvent = (serializedEvent: SerializedEvent): Event => {
 
   return deserializedEvent;
 };
-
-export const getEventType = (event: Event): EventType['type'] => ('online' in event ? 'online' : 'local');
 
 export const parseDates: (keyof Event)[] = ['dateStart', 'dateEnd'];

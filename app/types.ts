@@ -1,4 +1,4 @@
-export type Document = {
+export type FirebaseDocumentData = {
   exists: boolean;
   hasPendingWrites: boolean;
   id: string;

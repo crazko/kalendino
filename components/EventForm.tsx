@@ -1,17 +1,12 @@
 import { Field, FormRenderProps } from 'react-final-form';
 
-import { Event, EventType } from 'app/event';
+import { Event } from 'app/event';
 import { Condition } from './Condition';
 import { composeValidators, match, required } from 'utils/validators';
 import { LocationField } from './LocationField';
 import { DateRangeField } from './DateRangeField';
 
-export const EventForm: React.FC<FormRenderProps<Event & EventType>> = ({
-  handleSubmit,
-  invalid,
-  submitting,
-  pristine,
-}) => (
+export const EventForm: React.FC<FormRenderProps<Event>> = ({ handleSubmit, invalid, submitting, pristine }) => (
   <form onSubmit={handleSubmit}>
     <Field name="name" component="input" validate={required} required></Field>
     <Field name="summary" component="textarea" validate={required} required></Field>
@@ -30,7 +25,7 @@ export const EventForm: React.FC<FormRenderProps<Event & EventType>> = ({
         <Condition when="type" is="online">
           <Field
             component="input"
-            name="online"
+            name="url"
             type="text"
             pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
             validate={composeValidators(

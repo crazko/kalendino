@@ -7,18 +7,7 @@ import { getDocument, useDocument } from '@nandorojo/swr-firestore';
 import { Form } from 'react-final-form';
 
 import { useAuth } from 'app/AuthProvider';
-import {
-  Event,
-  WithEvent,
-  SerializedEvent,
-  deserializeEvent,
-  serializeEvent,
-  parseDates,
-  EventType,
-  OnlineEvent,
-  LocalEvent,
-  getEventType,
-} from 'app/event';
+import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from 'app/event';
 import { EventForm } from 'components/EventForm';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -40,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEvent }) => {
+const EditEventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEvent }) => {
   const { isLoggedIn } = useAuth();
   const router = useRouter();
 
@@ -53,7 +42,7 @@ const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEven
 
   const title = `Edit ${event.name}`;
 
-  const onSubmit = async (values: Event & EventType) => {
+  const onSubmit = async (values: Event) => {
     // TODO: Runs spinner
     try {
       await update({
@@ -62,13 +51,11 @@ const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEven
         dateStart: values.dateStart,
         dateEnd: values.dateEnd,
         ...(values.type === 'online'
-          ? { online: (values as OnlineEvent).online, location: firebase.firestore.FieldValue.delete() }
+          ? { type: 'online', url: values.url, location: firebase.firestore.FieldValue.delete() }
           : {
-              online: firebase.firestore.FieldValue.delete(),
-              location: new firebase.firestore.GeoPoint(
-                (values as LocalEvent).location.latitude,
-                (values as LocalEvent).location.longitude
-              ),
+              type: 'local',
+              url: firebase.firestore.FieldValue.delete(),
+              location: new firebase.firestore.GeoPoint(values.location.latitude, values.location.longitude),
             }),
       });
 
@@ -91,9 +78,9 @@ const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEven
 
       <h1>{title}</h1>
 
-      <Form onSubmit={onSubmit} initialValues={{ ...event, type: getEventType(event) }} component={EventForm} />
+      <Form onSubmit={onSubmit} initialValues={event} component={EventForm} />
     </>
   );
 };
 
-export default EventPage;
+export default EditEventPage;
