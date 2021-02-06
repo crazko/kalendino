@@ -7,6 +7,7 @@ import { useCollection } from '@nandorojo/swr-firestore';
 import { useAuth } from 'app/AuthProvider';
 import { Event } from 'app/event';
 import { EventForm } from 'components/EventForm';
+import { Heading } from 'components/Heading';
 
 const title = 'Add Event';
 
@@ -17,11 +18,7 @@ const AddEventPage: React.FC = () => {
   const { add } = useCollection('/events');
 
   if (!isLoggedIn) {
-    if (typeof window !== 'undefined') {
-      router.push('/');
-    }
-
-    return null;
+    return <Heading>You need to be logged in</Heading>;
   }
 
   const onSubmit = async (values: Event) => {
@@ -57,7 +54,7 @@ const AddEventPage: React.FC = () => {
         <title>{title}</title>
       </Head>
 
-      <h1>{title}</h1>
+      <Heading>{title}</Heading>
 
       <Form onSubmit={onSubmit} initialValues={{ type: 'online' }} component={EventForm} />
     </>

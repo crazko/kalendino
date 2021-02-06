@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useCollection } from '@nandorojo/swr-firestore';
 
 import { Event, parseDates } from 'app/event';
+import { Heading } from 'components/Heading';
 import { Loader } from 'components/Loader';
 import { Showcase } from 'components/Showcase';
 
@@ -22,7 +23,7 @@ const HomePage = () => {
         <title>{title}</title>
       </Head>
 
-      <h1>{title}</h1>
+      <Heading>{title}</Heading>
 
       {data ? <Showcase events={data.filter((event) => event.dateStart > now)} /> : <Loader />}
     </>

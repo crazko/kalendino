@@ -6,6 +6,7 @@ import { getDocument } from '@nandorojo/swr-firestore';
 import { useAuth } from 'app/AuthProvider';
 import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from 'app/event';
 import { Date } from 'components/Date';
+import { Heading } from 'components/Heading';
 import { Location } from 'components/Location';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -38,7 +39,8 @@ const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEven
       <Head>
         <title>{name}</title>
       </Head>
-      <h1>{name}</h1>
+
+      <Heading>{name}</Heading>
 
       <Date dateStart={dateStart} dateEnd={dateEnd} />
       {isLoggedIn && (

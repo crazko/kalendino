@@ -9,6 +9,7 @@ import { Form } from 'react-final-form';
 import { useAuth } from 'app/AuthProvider';
 import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from 'app/event';
 import { EventForm } from 'components/EventForm';
+import { Heading } from 'components/Heading';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.query.id;
@@ -37,7 +38,7 @@ const EditEventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serialized
   const { update } = useDocument<Event>(`/events/${event.id}`);
 
   if (!isLoggedIn) {
-    return <h1>You need to be logged in</h1>;
+    return <Heading>You need to be logged in</Heading>;
   }
 
   const title = `Edit ${event.name}`;
@@ -76,7 +77,7 @@ const EditEventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serialized
         <title>{title}</title>
       </Head>
 
-      <h1>{title}</h1>
+      <Heading>{title}</Heading>
 
       <Form onSubmit={onSubmit} initialValues={event} component={EventForm} />
     </>
