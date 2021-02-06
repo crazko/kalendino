@@ -1,12 +1,46 @@
 rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
+    // In a real world application we would also check for user permissions
+    function isLoggedIn() {
+      return request.auth.uid != null
+    }
+
+    function date() {
+      return request.resource.data.dateStart is timestamp &&
+             request.resource.data.dateEnd is timestamp &&
+             request.time < request.resource.data.dateStart &&
+             request.resource.data.dateStart < request.resource.data.dateEnd
+    }
+
+    function eventType() {
+      return (
+              request.resource.data.type == 'online' &&
+              request.resource.data.url is string &&
+              !('location' in request.resource.data)
+             ) || (
+              request.resource.data.type == 'local' &&
+              request.resource.data.location is latlng &&
+              !('url' in request.resource.data)
+             )
+    }
+
+    function eventIsValid() {
+      return request.resource.data.name is string &&
+            request.resource.data.summary is string &&
+            eventType() &&
+            date()
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }
 
     match /events/{eventId} {
-      allow read: true;
+      allow read: if true;
+
+      allow update: if  isLoggedIn() && eventIsValid();
     }
   }
 }
