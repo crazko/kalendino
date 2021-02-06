@@ -15,28 +15,32 @@ export const Layout: React.FC = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header>
+      <header className="sticky top-0 flex p-5 bg-white border-b-2 border-red-200 shadow-md">
         <Link href="/">
-          <a>kalendi.no</a>
+          <a className="inline-block font-bold tracking-tighter text-lg text-gray-800 p-2 mr-5 -ml-2">kalendi.no</a>
         </Link>
 
         <Navigation items={items} />
 
         {isLoggedIn ? (
-          <button onClick={logout} type="button">
+          <button onClick={logout} type="button" className="p-2 -mr-2">
             logout
           </button>
         ) : (
-          <button onClick={login} type="button">
+          <button onClick={login} type="button" className="p-2 -mr-2">
             login
           </button>
         )}
       </header>
 
-      <main role="role">{children}</main>
+      <main role="main" className="px-5 py-10 flex-1 bg-gray-50">
+        {children}
+      </main>
 
-      <footer>
-        <a href="https://github.com/crazko/kalendino">source</a>
+      <footer className="p-5 text-center border-t-2 border-red-200 text-xs uppercase">
+        <a href="https://github.com/crazko/kalendino" className="text-gray-600">
+          source
+        </a>
       </footer>
     </>
   );

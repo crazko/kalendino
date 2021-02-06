@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
+  children?: never;
   center: LatLngTuple;
   zoom?: number;
   onClick?: (values: LatLngTuple) => void;

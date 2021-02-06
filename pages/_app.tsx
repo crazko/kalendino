@@ -7,6 +7,8 @@ import { AuthProvider } from 'app/AuthProvider';
 import { Layout } from 'layout/Layout';
 import { Fuego } from 'utils/fuego';
 
+import '../styles/main.css';
+
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,

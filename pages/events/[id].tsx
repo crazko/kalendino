@@ -5,9 +5,12 @@ import { getDocument } from '@nandorojo/swr-firestore';
 
 import { useAuth } from 'app/AuthProvider';
 import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from 'app/event';
-import { Date } from 'components/Date';
+import { EventDate } from 'components/EventDate';
 import { Heading } from 'components/Heading';
 import { Location } from 'components/Location';
+import { isAfter } from 'date-fns';
+
+const today = new Date();
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.query.id;
@@ -35,26 +38,29 @@ const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEven
   const { id, name, dateStart, dateEnd, summary } = event;
 
   return (
-    <>
+    <div className="container mx-auto">
       <Head>
         <title>{name}</title>
       </Head>
 
       <Heading>{name}</Heading>
 
-      <Date dateStart={dateStart} dateEnd={dateEnd} />
-      {isLoggedIn && (
+      <EventDate dateStart={dateStart} dateEnd={dateEnd} className="md:text-xl my-5" showFull />
+
+      {isLoggedIn && isAfter(dateStart, today) && (
         <div>
           <Link href={`/events/${id}/edit`}>
             <a>edit</a>
           </Link>
         </div>
       )}
+
+      <div className="whitespace-pre-line my-5 max-w-screen-sm border-t-2 border-red-200 pt-5">{summary}</div>
+
       <div>
         <Location event={event} />
       </div>
-      <div style={{ whiteSpace: 'pre-line' }}>{summary}</div>
-    </>
+    </div>
   );
 };
 
