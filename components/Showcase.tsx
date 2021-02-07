@@ -1,11 +1,12 @@
 import Link from 'next/link';
 
-import { WithEvents } from '../app/event';
+import { Event } from '../app/event';
 import { EventDate } from './EventDate';
 
 type ShowcaseProps = {
   children?: never;
-} & WithEvents;
+  events: Event[];
+};
 
 export const Showcase: React.FC<ShowcaseProps> = ({ events }) => (
   <div className="py-10 grid gap-5 lg:grid-cols-3 2xl:grid-cols-5">

@@ -28,10 +28,6 @@ export type WithEvent<EventType extends Event | SerializedEvent = Event> = {
   event: EventType;
 };
 
-export type WithEvents = {
-  events: Event[];
-};
-
 // Need to simplify objects, see https://github.com/vercel/next.js/issues/13209#issuecomment-633149650
 export const serializeEvent = (event: Event) => {
   const { __snapshot, ...eventWithoutSnapshot } = event;
