@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { useAuth } from 'app/AuthProvider';
 import { NavigationItem } from 'app/types';
+import { useRouter } from 'next/router';
 
 type NavigationProps = {
   children?: never;
@@ -10,6 +11,7 @@ type NavigationProps = {
 
 export const Navigation: React.FC<NavigationProps> = ({ items }) => {
   const { isLoggedIn } = useAuth();
+  const { pathname } = useRouter();
 
   return (
     <nav role="navigation" className="w-full">
@@ -19,7 +21,13 @@ export const Navigation: React.FC<NavigationProps> = ({ items }) => {
             ((walled && isLoggedIn) || !walled) && (
               <li key={url}>
                 <Link href={url}>
-                  <a className="inline-block sm:text-lg text-gray-800 hover:text-red-700 transition p-2">{name}</a>
+                  <a
+                    className={`inline-block sm:text-lg hover:underline p-2 ${
+                      pathname === url ? 'text-red-600' : 'text-gray-800'
+                    }`}
+                  >
+                    {name}
+                  </a>
                 </Link>
               </li>
             )
