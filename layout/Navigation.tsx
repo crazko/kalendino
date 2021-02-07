@@ -13,13 +13,13 @@ export const Navigation: React.FC<NavigationProps> = ({ items }) => {
 
   return (
     <nav role="navigation" className="w-full">
-      <ul className="flex space-x-5">
+      <ul className="flex justify-center space-x-1 sm:space-x-5">
         {items.map(
           ({ name, walled, url }) =>
             ((walled && isLoggedIn) || !walled) && (
               <li key={url}>
                 <Link href={url}>
-                  <a className="inline-block text-lg text-gray-800 p-2">{name}</a>
+                  <a className="inline-block text-lg text-gray-800 hover:text-red-700 transition p-2">{name}</a>
                 </Link>
               </li>
             )

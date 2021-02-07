@@ -5,6 +5,8 @@ import { getDocument } from '@nandorojo/swr-firestore';
 
 import { useAuth } from 'app/AuthProvider';
 import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from 'app/event';
+import { Button } from 'components/Button';
+import { Container } from 'components/Container';
 import { EventDate } from 'components/EventDate';
 import { Heading } from 'components/Heading';
 import { Location } from 'components/Location';
@@ -37,8 +39,9 @@ const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEven
   const event = deserializeEvent(serializedEvent);
   const { id, name, dateStart, dateEnd, summary } = event;
 
+
   return (
-    <div className="container mx-auto">
+    <Container>
       <Head>
         <title>{name}</title>
       </Head>
@@ -47,20 +50,21 @@ const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEven
 
       <EventDate dateStart={dateStart} dateEnd={dateEnd} className="md:text-xl my-5" showFull />
 
-      {isLoggedIn && isAfter(dateStart, today) && (
-        <div>
+      <div className="space-x-3">
+        <Button>export</Button>
+        {isLoggedIn && isAfter(dateStart, today) && (
           <Link href={`/events/${id}/edit`}>
-            <a>edit</a>
+            <a className="p-2 inline-block shadow-sm font-bold bg-white rounded-sm text-gray-800 hover:text-red-700 transition">
+              edit
+            </a>
           </Link>
-        </div>
-      )}
+        )}
+      </div>
 
       <div className="whitespace-pre-line my-5 max-w-screen-sm border-t-2 border-red-200 pt-5">{summary}</div>
 
-      <div>
-        <Location event={event} />
-      </div>
-    </div>
+      <Location event={event} />
+    </Container>
   );
 };
 

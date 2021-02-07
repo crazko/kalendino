@@ -6,6 +6,7 @@ import { useCollection } from '@nandorojo/swr-firestore';
 
 import { useAuth } from 'app/AuthProvider';
 import { Event } from 'app/event';
+import { Container } from 'components/Container';
 import { EventForm } from 'components/EventForm';
 import { Heading } from 'components/Heading';
 
@@ -49,7 +50,7 @@ const AddEventPage: React.FC = () => {
   };
 
   return (
-    <>
+    <Container>
       <Head>
         <title>{title}</title>
       </Head>
@@ -57,7 +58,7 @@ const AddEventPage: React.FC = () => {
       <Heading>{title}</Heading>
 
       <Form onSubmit={onSubmit} initialValues={{ type: 'online' }} component={EventForm} />
-    </>
+    </Container>
   );
 };
 

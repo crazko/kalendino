@@ -8,6 +8,7 @@ import { Form } from 'react-final-form';
 
 import { useAuth } from 'app/AuthProvider';
 import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from 'app/event';
+import { Container } from 'components/Container';
 import { EventForm } from 'components/EventForm';
 import { Heading } from 'components/Heading';
 
@@ -72,7 +73,7 @@ const EditEventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serialized
   };
 
   return (
-    <>
+    <Container>
       <Head>
         <title>{title}</title>
       </Head>
@@ -80,7 +81,7 @@ const EditEventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serialized
       <Heading>{title}</Heading>
 
       <Form onSubmit={onSubmit} initialValues={event} component={EventForm} />
-    </>
+    </Container>
   );
 };
 

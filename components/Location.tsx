@@ -14,9 +14,12 @@ const DynamicMap = dynamic(() => import('./Map').then((module) => module.Map) as
 export const Location: React.FC<LocationProps> = ({ event }) => {
   if (event.type === 'online') {
     return (
-      <a href={event.url} className="font-bold text-red-700">
-        {event.url}
-      </a>
+      <div>
+        <span className="font-bold">Join at</span>{' '}
+        <a href={event.url} className="font-bold text-red-700 hover:underline">
+          {event.url}
+        </a>
+      </div>
     );
   }
 

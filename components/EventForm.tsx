@@ -1,11 +1,12 @@
 import { Field, FormRenderProps } from 'react-final-form';
 
 import { Event } from 'app/event';
+import { Button } from './Button';
 import { Condition } from './Condition';
-import { composeValidators, match, required } from 'utils/validators';
-import { LocationField } from './LocationField';
 import { DateRangeField } from './DateRangeField';
+import { LocationField } from './LocationField';
 import { urlPattern } from 'utils/string';
+import { composeValidators, match, required } from 'utils/validators';
 
 const regexUrl = new RegExp(urlPattern);
 
@@ -41,8 +42,8 @@ export const EventForm: React.FC<FormRenderProps<Event>> = ({ handleSubmit, inva
       </div>
     </fieldset>
 
-    <button type="submit" disabled={invalid || submitting || pristine}>
+    <Button type="submit" disabled={invalid || submitting || pristine}>
       Save
-    </button>
+    </Button>
   </form>
 );
