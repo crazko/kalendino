@@ -13,6 +13,9 @@ module.exports = {
       red: colors.rose,
     },
     extend: {
+      lineHeight: {
+        0: '0',
+      },
       zIndex: {
         5000: '5000',
       },
