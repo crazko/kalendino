@@ -5,7 +5,15 @@ import { useRouter } from 'next/router';
 import { getDocument, useDocument } from '@nandorojo/swr-firestore';
 
 import { useAuth } from 'app/AuthProvider';
-import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from 'app/event';
+import {
+  Event,
+  WithEvent,
+  SerializedEvent,
+  deserializeEvent,
+  serializeEvent,
+  parseDates,
+  createGoogleURLLink,
+} from 'app/event';
 import { Button } from 'components/Button';
 import { Container } from 'components/Container';
 import { EventDate } from 'components/EventDate';
@@ -65,7 +73,14 @@ const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEven
       <EventDate dateStart={dateStart} dateEnd={dateEnd} className="md:text-xl my-5" showFull />
 
       <div className="space-x-3">
-        <Button>export</Button>
+        <a
+          href={createGoogleURLLink(event)}
+          className="p-2 inline-block shadow-sm font-bold bg-white rounded-sm text-gray-800 hover:text-red-700 transition"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          export
+        </a>
         {isLoggedIn && isAfter(dateStart, today) && (
           <Link href={`/events/${id}/edit`}>
             <a className="p-2 inline-block shadow-sm font-bold bg-white rounded-sm text-gray-800 hover:text-red-700 transition">

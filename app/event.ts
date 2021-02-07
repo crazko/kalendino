@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import { formatISO } from 'date-fns';
 
 import { FirebaseDocumentData } from './types';
 
@@ -69,6 +70,24 @@ export const deserializeEvent = (serializedEvent: SerializedEvent): Event => {
   }
 
   return deserializedEvent;
+};
+
+export const createGoogleURLLink = (event: Event) => {
+  const { name, summary, dateStart, dateEnd } = event;
+
+  let location;
+
+  if (event.type === 'online') {
+    location = event.url;
+  } else {
+    location = `${event.location.latitude} ${event.location.longitude}`;
+  }
+
+  return `https://www.google.com/calendar/render?action=TEMPLATE&text=${name}&details=${encodeURIComponent(
+    summary
+  )}&location=${location}&dates=${formatISO(dateStart, { format: 'basic' })}%2F${formatISO(dateEnd, {
+    format: 'basic',
+  })}`;
 };
 
 export const parseDates: (keyof Event)[] = ['dateStart', 'dateEnd'];
