@@ -19,7 +19,7 @@ export const Navigation: React.FC<NavigationProps> = ({ items }) => {
             ((walled && isLoggedIn) || !walled) && (
               <li key={url}>
                 <Link href={url}>
-                  <a className="inline-block text-lg text-gray-800 hover:text-red-700 transition p-2">{name}</a>
+                  <a className="inline-block sm:text-lg text-gray-800 hover:text-red-700 transition p-2">{name}</a>
                 </Link>
               </li>
             )
