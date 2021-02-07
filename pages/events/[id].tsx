@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getDocument, useDocument } from '@nandorojo/swr-firestore';
 import { isAfter } from 'date-fns';
+import { toast } from 'react-toastify';
 
 import { useAuth } from 'app/AuthProvider';
 import {
@@ -56,9 +57,12 @@ const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEven
     if (confirm('Do you really want to remove this event?')) {
       try {
         await deleteDocument();
+
+        toast('Event was removed.');
+
         router.push(`/`);
       } catch (error) {
-        // notif
+        toast.error('Something went wrong.');
       }
     }
   };

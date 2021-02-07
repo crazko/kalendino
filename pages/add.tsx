@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Form } from 'react-final-form';
 import firebase from 'firebase/app';
 import { useCollection } from '@nandorojo/swr-firestore';
-import { FORM_ERROR } from 'final-form';
+import { toast } from 'react-toastify';
 
 import { useAuth } from 'app/AuthProvider';
 import { Event } from 'app/event';
@@ -42,12 +42,11 @@ const AddEventPage: React.FC = () => {
             }),
       });
 
-      router.push(`/`);
+      toast('Event was successfully created.');
 
-      // toast
+      router.push(`/`);
     } catch (e) {
-      // toast
-      return { [FORM_ERROR]: 'Something went wrong.' };
+      toast.error('Something went wrong.');
     }
   };
 

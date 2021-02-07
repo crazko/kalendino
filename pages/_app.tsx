@@ -2,11 +2,13 @@ import { AppProps } from 'next/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import { FuegoProvider } from '@nandorojo/swr-firestore';
+import { ToastContainer } from 'react-toastify';
 
 import { AuthProvider } from 'app/AuthProvider';
 import { Layout } from 'layout/Layout';
 import { Fuego } from 'utils/fuego';
 
+import 'react-toastify/dist/ReactToastify.css';
 import '../styles/main.css';
 
 const firebaseConfig = {
@@ -26,6 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <FuegoProvider fuego={fuego}>
         <Layout>
           <Component {...pageProps} />
+          <ToastContainer />
         </Layout>
       </FuegoProvider>
     </AuthProvider>

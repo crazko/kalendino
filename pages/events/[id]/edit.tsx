@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import firebase from 'firebase/app';
 import { getDocument, useDocument } from '@nandorojo/swr-firestore';
 import { Form } from 'react-final-form';
-import { FORM_ERROR } from 'final-form';
+import { toast } from 'react-toastify';
 
 import { useAuth } from 'app/AuthProvider';
 import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from 'app/event';
@@ -74,12 +74,11 @@ const EditEventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serialized
             }),
       });
 
-      router.push(`/events/${values.id}`);
+      toast('Event was successfully updated.');
 
-      // toast
+      router.push(`/events/${values.id}`);
     } catch (e) {
-      // toast
-      return { [FORM_ERROR]: 'Something went wrong.' };
+      toast.error('Something went wrong.');
     }
   };
 

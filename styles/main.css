@@ -18,3 +18,12 @@ body,
 
   @apply px-1;
 }
+
+.Toastify__toast--default {
+  @apply text-gray-700;
+}
+
+.Toastify__toast--error {
+  @apply bg-red-500;
+  @apply text-white;
+}
