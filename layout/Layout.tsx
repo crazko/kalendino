@@ -26,7 +26,7 @@ export const Layout: React.FC = ({ children }) => {
         <Navigation items={items} />
 
         <Button onClick={isLoggedIn ? logout : login} className="absolute sm:static top-2 right-2">
-          {isLoggedIn ? 'logout' : 'logout'}
+          {isLoggedIn ? 'logout' : 'login'}
         </Button>
       </header>
 
