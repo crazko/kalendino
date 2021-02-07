@@ -9,15 +9,12 @@ type MapProps = {
   center: LatLngTuple;
   zoom?: number;
   onClick?: (values: LatLngTuple) => void;
-  className?: string;
 };
 
 type LocationMarker = {
   position?: LatLngTuple;
   onClick?: (location: LatLngTuple) => void;
 };
-
-const style = { width: '100%', height: '500px' };
 
 const icon = new Icon({
   iconUrl: '/marker-icon.png',
@@ -41,8 +38,8 @@ const LocationMarker: React.FC<LocationMarker> = ({ position: initialPosition, o
   return position ? <Marker position={position} icon={icon} /> : null;
 };
 
-export const Map: React.FC<MapProps> = ({ onClick, center, className, zoom = 13 }) => (
-  <MapContainer center={center} zoom={zoom} className={className} style={style}>
+export const Map: React.FC<MapProps> = ({ onClick, center, zoom = 13 }) => (
+  <MapContainer center={center} zoom={zoom} className="w-100 h-96">
     <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" />
     <LocationMarker position={center} onClick={onClick} />
   </MapContainer>
