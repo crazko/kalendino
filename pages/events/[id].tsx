@@ -77,7 +77,7 @@ const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEven
 
       <EventDate dateStart={dateStart} dateEnd={dateEnd} className="md:text-xl my-5" showFull />
 
-      <div className="flex max-w-screen-sm">
+      <div className="flex border-b-2 border-red-200 pb-5">
         <div className="flex space-x-3">
           <a
             href={createGoogleURLLink(event)}
@@ -108,7 +108,7 @@ const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEven
         )}
       </div>
 
-      <div className="whitespace-pre-line my-5 max-w-screen-sm border-t-2 border-red-200 pt-5">{summary}</div>
+      <div className="whitespace-pre-line my-10 max-w-prose">{summary}</div>
 
       <Location event={event} />
     </Container>

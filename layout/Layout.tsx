@@ -16,7 +16,7 @@ export const Layout: React.FC = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className="sticky top-0 sm:flex p-2 sm:p-5 bg-white border-b-2 border-red-200 shadow-md text-center sm:text-left z-5000">
+      <header className="sticky top-0 sm:flex p-2 sm:p-5 bg-white border-b-2 border-red-200 text-center sm:text-left z-5000">
         <Link href="/">
           <a className="inline-block font-bold tracking-tighter text-lg text-gray-800 hover:text-red-700 p-2 sm:mr-5 sm:-ml-2 transition">
             kalendi.no
