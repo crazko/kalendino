@@ -17,6 +17,7 @@ export const EventForm: React.FC<FormRenderProps<Event>> = ({
   invalid,
   submitting,
   submitSucceeded,
+  submitError,
   pristine,
 }) => (
   <form onSubmit={handleSubmit}>
@@ -73,6 +74,10 @@ export const EventForm: React.FC<FormRenderProps<Event>> = ({
         <LocationField />
       </Condition>
     </fieldset>
+
+    {submitError && (
+      <div className="p-2 bg-red-300 text-red-900 font-bold shadow-sm rounded-sm inline-block mb-2">{submitError}</div>
+    )}
 
     <Button
       className="flex space-x-2 text-xl"
