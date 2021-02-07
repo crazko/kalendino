@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { Form } from 'react-final-form';
 import firebase from 'firebase/app';
 import { useCollection } from '@nandorojo/swr-firestore';
+import { FORM_ERROR } from 'final-form';
 
 import { useAuth } from 'app/AuthProvider';
 import { Event } from 'app/event';
@@ -23,7 +24,6 @@ const AddEventPage: React.FC = () => {
   }
 
   const onSubmit = async (values: Event) => {
-    // TODO: Runs spinner
     try {
       await add({
         name: values.name,
@@ -43,9 +43,7 @@ const AddEventPage: React.FC = () => {
       // toast
     } catch (e) {
       // toast
-      throw e;
-    } finally {
-      // TODO: remove spinner
+      return { [FORM_ERROR]: 'Something went wrong.' };
     }
   };
 

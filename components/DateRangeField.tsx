@@ -5,6 +5,7 @@ import { addHours, startOfHour } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { Event } from 'app/event';
+import { Label } from './Label';
 import { after, before, composeValidators, required } from 'utils/validators';
 
 const initialStartDate = addHours(startOfHour(new Date()), 1);
@@ -33,7 +34,10 @@ export const DateRangeField: React.FC<{ children?: never }> = () => {
   return (
     <div style={{ zIndex: 2000, position: 'relative' }}>
       <div>
+        <Label htmlFor="dateStart">Start Date:</Label>
         <DatePicker
+          id="dateStart"
+          className="p-2 mt-2 mb-4"
           selected={startDate}
           onChange={(date) => setStartDate(date)}
           selectsStart
@@ -46,7 +50,10 @@ export const DateRangeField: React.FC<{ children?: never }> = () => {
         />
       </div>
       <div>
+        <Label htmlFor="dateEnd">End Date:</Label>
         <DatePicker
+          id="dateEnd"
+          className="p-2 mt-2 mb-4"
           selected={endDate}
           onChange={(date) => setEndDate(date)}
           selectsEnd

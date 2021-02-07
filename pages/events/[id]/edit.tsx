@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import firebase from 'firebase/app';
 import { getDocument, useDocument } from '@nandorojo/swr-firestore';
 import { Form } from 'react-final-form';
+import { FORM_ERROR } from 'final-form';
 
 import { useAuth } from 'app/AuthProvider';
 import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from 'app/event';
@@ -45,7 +46,6 @@ const EditEventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serialized
   const title = `Edit ${event.name}`;
 
   const onSubmit = async (values: Event) => {
-    // TODO: Runs spinner
     try {
       await update({
         name: values.name,
@@ -66,9 +66,7 @@ const EditEventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serialized
       // toast
     } catch (e) {
       // toast
-      throw e;
-    } finally {
-      // TODO: remove spinner
+      return { [FORM_ERROR]: 'Something went wrong.' };
     }
   };
 
