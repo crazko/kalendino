@@ -37,7 +37,7 @@ export const DateRangeField: React.FC<{ children?: never }> = () => {
         <Label htmlFor="dateStart">Start Date:</Label>
         <DatePicker
           id="dateStart"
-          className="p-2 mt-2 mb-4"
+          className="p-2 mt-2 mb-4 shadow-sm rounded-sm"
           selected={startDate}
           onChange={(date) => setStartDate(date)}
           selectsStart
@@ -53,7 +53,7 @@ export const DateRangeField: React.FC<{ children?: never }> = () => {
         <Label htmlFor="dateEnd">End Date:</Label>
         <DatePicker
           id="dateEnd"
-          className="p-2 mt-2 mb-4"
+          className="p-2 mt-2 mb-4 shadow-sm rounded-sm"
           selected={endDate}
           onChange={(date) => setEndDate(date)}
           selectsEnd

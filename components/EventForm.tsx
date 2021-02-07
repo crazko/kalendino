@@ -28,7 +28,7 @@ export const EventForm: React.FC<FormRenderProps<Event>> = ({
         name="name"
         component="input"
         validate={required}
-        className="p-2 mt-2 mb-4 w-full max-w-screen-sm"
+        className="p-2 mt-2 mb-4 w-full max-w-screen-sm shadow-sm rounded-sm"
         required
       ></Field>
       <DateRangeField />
@@ -38,7 +38,7 @@ export const EventForm: React.FC<FormRenderProps<Event>> = ({
         name="summary"
         component="textarea"
         validate={required}
-        className="p-2 mt-2 mb-4 w-full max-w-screen-sm"
+        className="p-2 mt-2 mb-4 w-full max-w-screen-sm shadow-sm rounded-sm"
         required
       ></Field>
     </fieldset>
@@ -59,7 +59,7 @@ export const EventForm: React.FC<FormRenderProps<Event>> = ({
         <Field
           component="input"
           id="url"
-          className="p-2 mt-2 mb-4 w-full max-w-screen-sm"
+          className="p-2 mt-2 mb-4 w-full max-w-screen-sm shadow-sm rounded-sm"
           name="url"
           type="text"
           pattern={urlPattern}
@@ -74,7 +74,11 @@ export const EventForm: React.FC<FormRenderProps<Event>> = ({
       </Condition>
     </fieldset>
 
-    <Button className="flex space-x-2" type="submit" disabled={invalid || submitting || submitSucceeded || pristine}>
+    <Button
+      className="flex space-x-2 text-xl"
+      type="submit"
+      disabled={invalid || submitting || submitSucceeded || pristine}
+    >
       <span>Save</span> {submitting && <Spinner />}
     </Button>
   </form>

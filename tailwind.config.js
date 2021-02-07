@@ -2,7 +2,7 @@ const colors = require('tailwindcss/colors');
 
 module.exports = {
   purge: ['./components/**/*.{ts,tsx}', './layout/**/*.{ts,tsx}', './pages/**/*.{ts,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: false,
   theme: {
     colors: {
       transparent: 'transparent',
@@ -12,7 +12,11 @@ module.exports = {
       gray: colors.trueGray,
       red: colors.rose,
     },
-    extend: {},
+    extend: {
+      zIndex: {
+        5000: '5000',
+      },
+    },
   },
   variants: {
     extend: {
