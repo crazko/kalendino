@@ -41,6 +41,8 @@ service cloud.firestore {
       allow read: if true;
 
       allow write, update: if  isLoggedIn() && eventIsValid();
+
+      allow delete: if isLoggedIn();
     }
   }
 }

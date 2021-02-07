@@ -1,7 +1,8 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { getDocument } from '@nandorojo/swr-firestore';
+import { useRouter } from 'next/router';
+import { getDocument, useDocument } from '@nandorojo/swr-firestore';
 
 import { useAuth } from 'app/AuthProvider';
 import { Event, WithEvent, SerializedEvent, deserializeEvent, serializeEvent, parseDates } from 'app/event';
@@ -35,10 +36,23 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEvent }) => {
   const { isLoggedIn } = useAuth();
+  const router = useRouter();
 
   const event = deserializeEvent(serializedEvent);
   const { id, name, dateStart, dateEnd, summary } = event;
 
+  const { deleteDocument } = useDocument(`/events/${id}`);
+
+  const handleDelete = async () => {
+    if (confirm('Do you really want to remove this event?')) {
+      try {
+        await deleteDocument();
+        router.push(`/`);
+      } catch (error) {
+        // notif
+      }
+    }
+  };
 
   return (
     <Container>
@@ -58,6 +72,11 @@ const EventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEven
               edit
             </a>
           </Link>
+        )}
+        {isLoggedIn && (
+          <Button onClick={handleDelete} className="bg-red-500 hover:bg-red-300">
+            delete
+          </Button>
         )}
       </div>
 
