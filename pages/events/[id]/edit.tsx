@@ -33,11 +33,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const EditEventPage: React.FC<WithEvent<SerializedEvent>> = ({ event: serializedEvent }) => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, state } = useAuth();
   const router = useRouter();
 
   const event = useMemo(() => deserializeEvent(serializedEvent), [serializedEvent.id]); // Prevent re-initialize form with old values on submit
   const { update } = useDocument<Event>(`/events/${event.id}`);
+
+  if (state === 'idle' || state === 'pending') {
+    return null;
+  }
 
   if (!isLoggedIn) {
     return <Heading>You need to be logged in</Heading>;

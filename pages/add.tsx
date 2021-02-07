@@ -14,10 +14,14 @@ import { Heading } from 'components/Heading';
 const title = 'Add Event';
 
 const AddEventPage: React.FC = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, state } = useAuth();
   const router = useRouter();
 
   const { add } = useCollection('/events');
+
+  if (state === 'idle' || state === 'pending') {
+    return null;
+  }
 
   if (!isLoggedIn) {
     return <Heading>You need to be logged in</Heading>;

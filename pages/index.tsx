@@ -14,7 +14,7 @@ const HomePage = () => {
   const { data } = useCollection<Event>('events', {
     parseDates,
     orderBy: ['dateStart', 'asc'],
-    // where: ['dateStart', '<', now], Currently not possible to query by datetime, see https://github.com/nandorojo/swr-firestore/issues/51
+    // where: ['dateStart', '<', now], Currently not possible to query by datetime :(, see https://github.com/nandorojo/swr-firestore/issues/51
   });
 
   return (
