@@ -31,9 +31,8 @@ const LocationMarker: React.FC<LocationMarker> = ({ position: initialPosition, o
 
   useMapEvents({
     click(e) {
-      setPosition([e.latlng.lat, e.latlng.lng]);
-
-      if (typeof onClick !== 'undefined') {
+      if (onClick !== undefined) {
+        setPosition([e.latlng.lat, e.latlng.lng]);
         onClick([e.latlng.lat, e.latlng.lng]);
       }
     },
