@@ -74,6 +74,8 @@ export const EventForm: React.FC<FormRenderProps<Event>> = ({
       </Condition>
     </fieldset>
 
+    <p className="py-2 text-red-700 text-sm font-bold">* all fields are mandatory</p>
+
     <Button
       className="flex space-x-2 text-xl"
       type="submit"
