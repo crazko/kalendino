@@ -25,6 +25,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
+  if (event.dateStart < new Date()) {
+    return {
+      redirect: {
+        destination: `/events/${id}`,
+        permanent: true,
+      },
+    };
+  }
+
   return {
     props: {
       event: serializeEvent(event),
