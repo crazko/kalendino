@@ -1,5 +1,3 @@
-export type NavigationItem = typeof items[0];
-
 export const items = [
   {
     name: 'all events',

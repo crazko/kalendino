@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { useAuth } from 'app/AuthProvider';
-import { NavigationItem } from 'app/navigation';
+import { NavigationItem } from 'app/types';
 
 type NavigationProps = {
   children?: never;
