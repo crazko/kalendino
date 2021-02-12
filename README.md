@@ -1,5 +1,7 @@
 # kalendi.no
 
+Small [Next.js](https://nextjs.org) test.
+
 ## Scripts
 
 | name                 | description                                                  |
